@@ -1,0 +1,22 @@
+.cart-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 5px;
+}
+
+#cartIndex{
+    width: 15px;
+    text-align: center;
+    position: relative;
+    top: -15px;
+    left: -13px;
+    transform: rotate(20deg);
+    border: none;
+    border-radius: 5px;
+}
+
+#cartIcon{
+    font-size: 1.3em;
+}

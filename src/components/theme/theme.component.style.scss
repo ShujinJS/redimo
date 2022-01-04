@@ -1,0 +1,244 @@
+// colors
+// dark-theme
+$dark-bg: #525252;
+$nav-dark-bg: #222222;
+$sidenav-dark-bg: #272727;
+$footer-dark-bg: #2a2a2a;
+$dark-color: #a1a1a1;
+$dark-hover-color: #e6e6e6;
+$dark-logo-color: rgb(68, 227, 248);
+
+
+// light-theme
+$light-bg: #f3f3f3;
+$nav-light-bg: #f3f3f3;
+$sidenav-light-bg: #f1f1f1;
+$sidenav-light-hover-bg: #e0e0e0;
+$footer-light-bg: #e7e7e7;
+$light-color: rgb(161, 161, 161);
+$light-hover-color: #494949;
+$light-logo-color: rgb(235, 205, 35);
+
+// transition
+$fast-transition: all 0.3s linear;
+
+
+.site-back-cover{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -111111111;
+}
+
+.logo-dark{
+    color: $dark-logo-color;
+}
+
+.logo-light{
+    color: $light-logo-color;
+    
+}
+
+.font-dark{
+    color: $dark-color;
+
+    &:hover{
+        color: $dark-hover-color;
+    }
+}
+
+.font-light{
+    color: $light-color;
+    transition: $fast-transition;
+
+    &:hover{
+        color: $light-hover-color;
+    }
+}
+
+.bg-light{
+    background-color: $light-bg;
+    transition: $fast-transition;
+}
+
+.bg-dark {
+    background-color: $dark-bg;
+    transition: $fast-transition;
+}
+
+.sec-dark{
+    background-color: $dark-logo-color;
+}
+
+.sec-light{
+    background-color: $light-logo-color;
+}
+
+.nav-bg-dark{
+    background-color: $nav-dark-bg;
+    transition: $fast-transition;
+}
+
+.sidenav-bg-dark{
+    background-color: $sidenav-dark-bg;
+}
+
+.sidenav-bg-light{
+    background-color: $sidenav-light-bg;
+}
+
+.sidenav-link-dark{
+    color: $dark-color;
+    transition: $fast-transition;
+
+    div{
+        color: inherit;
+
+        &:hover{
+            color: $dark-hover-color;
+            background-color: $nav-dark-bg;
+        }
+    }
+
+    ul{
+        li{
+            &:hover{
+                color: $dark-hover-color;
+                background-color: $nav-dark-bg;
+            }
+        }
+    }
+
+    a{
+        color: inherit;
+        transition: $fast-transition;
+    }
+}
+
+.sidenav-link-light{
+    color: $light-color;
+    transition: $fast-transition;
+
+    div{
+        color: inherit;
+
+        &:hover{
+            color: $light-hover-color;
+            background-color: $sidenav-light-hover-bg;
+        }
+    }
+
+    ul{
+        li{
+            &:hover{
+                color: $light-hover-color;
+                background-color: $sidenav-light-hover-bg;
+            }
+        }
+    }
+
+    a{
+        color: inherit;
+        transition: $fast-transition;
+    }
+}
+
+.footer-bg-dark{
+    color: $dark-color;
+    background-color: $footer-dark-bg;
+    transition: $fast-transition;
+}
+
+.footer-bg-light{
+    color: $light-color;
+    background-color: $footer-light-bg;
+    transition: $fast-transition;
+}
+
+.input-dark{
+    color: $dark-logo-color;
+    border: 1px solid $dark-logo-color;
+}
+
+.input-light{
+    color: $light-logo-color;
+    border: 1px solid $light-logo-color;
+}
+
+.toggle-btn{
+    display: none;
+    width: 30px;
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: $fast-transition;
+
+    @media only screen and (max-width: 1000px){
+        display: flex;
+        align-items: center;
+    }
+}
+
+.toggle-btn-dark{
+    color: $dark-logo-color;
+    background-color: $nav-dark-bg;
+    border: 1px solid $dark-logo-color;
+}
+
+.toggle-btn-light{
+    color: $light-logo-color;
+    background-color: $nav-light-bg;
+    border: 1px solid $light-logo-color;
+}
+
+.form-input-dark{
+    border-bottom: 1px solid $dark-logo-color;
+
+    &::placeholder{
+        color: $dark-color;
+    }
+}
+
+.form-input-light{
+    border-bottom: 1px solid $light-logo-color;
+
+    &::placeholder{
+        color: $light-color;
+    }
+}
+
+.theme-btn-dark{
+    color: $nav-dark-bg;
+}
+
+.theme-btn-light{
+    color: $nav-light-bg;
+}
+
+.theme-btn-sun{
+    color: $light-logo-color;
+}
+
+.sidenav-holder{
+    height: 100%;
+    position: fixed;
+
+}
+
+.toggled-off-sidenav{
+    position: absolute;
+    margin-left: -200px;
+    bottom: 0;
+}
+
+.toggled-on-sidenav{
+    display: flex;
+    transition: $fast-transition;
+
+    
+    @media only screen and (min-width: 1000px){
+        display: none;
+    }
+}

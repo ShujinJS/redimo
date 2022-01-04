@@ -1,0 +1,27 @@
+// colors
+// dark-theme
+$dark-bg: #222222;
+$dark-color: #a1a1a1;
+$dark-hover-color: #e6e6e6;
+$dark-logo-color: rgb(68, 227, 248);
+// light-theme
+$light-bg: #f3f3f3;
+$light-color: #707070;
+$light-hover-color: rgb(189, 189, 189);
+$light-logo-color: rgb(248, 221, 68);
+
+$auth-color: #f3f3f3;
+
+// transition
+$fast-transition: all 0.3s linear;
+
+button{
+    padding: 5px;
+    width: 55px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-around;
+    outline: none;
+    border-radius: 15px;
+    cursor: pointer;
+}

@@ -1,0 +1,102 @@
+// colors
+$nav-dark-bg: #222222;
+$base-color: rgb(68, 227, 248);
+$dark-color: #a1a1a1;
+$dark-hover-color: #e6e6e6;
+
+// transition
+$fast-transition: all 0.3s linear;
+
+// mixins
+@mixin flex-column-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin flex-center-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sideNavContainer{
+    font-size: 16px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition: $fast-transition;
+
+    @include flex-column-center;
+
+    @media only screen and (max-width: 1000px){
+        width: 200px;
+        height: 100%;
+        @include flex-column-center;
+    }
+
+    #sideNavGroup{
+        margin-top: 20px;
+
+        @include flex-column-center;
+
+        .sidenav-title-holder{
+            width: 90%;
+            @include flex-center-center;
+
+            .home-link-container{
+                @include flex-center-center;
+   
+                .sidenav-brand-logo{
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                }
+
+                span{
+                    font-size: 1.6em;
+                } 
+            }
+
+        }
+
+        .search-box-side{
+            margin-top: 50px;
+        }
+
+        #sideNavList{
+            text-align: center;
+    
+            .side-nav-inner-links{
+                padding: 7px;
+                cursor: pointer;
+                transition: $fast-transition;
+                @include flex-center-center;
+            }
+    
+            li{
+                width: 100%;
+                padding: 10px;
+    
+                .side-link-icon{
+                    margin-left: 5px;
+                    font-size: 16px;
+                }
+            }
+    
+            hr{
+                width: 70%;
+                margin: 0 auto;
+                border-color: $base-color;
+            }
+        }
+
+        .user-panel-side{
+            position: absolute;
+            bottom: 100px;
+        }
+    }
+
+
+
+
+
+}
