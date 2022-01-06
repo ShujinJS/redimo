@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER": "shujin",
+        "MONGO_PASSWORD": "projectprovidentia",
+        "MONGO_DB": "redimodb"
+    }
+}
