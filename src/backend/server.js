@@ -25,11 +25,7 @@ app.use(
     })
 )
 
-// const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@redimodb.67se9.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
-// const options = { useNewUrlParser: true, useUnifiedTopology: true }
-
-
-const uri = `mongodb+srv://shujin:projectprovidentia@redimodb.67se9.mongodb.net/redimodb?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@redimodb.67se9.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
 mongoose
