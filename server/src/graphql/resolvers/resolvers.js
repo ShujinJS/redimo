@@ -1,4 +1,5 @@
-const Article = require("../../models/article")
+const Article = require("../../models/article");
+const Category = require("../../models/category");
 
 /*
     resolver: GraphQL query'sinden gelen response'u oluşturmak için yardımcı olan function'ların bir collection'ıdır.
@@ -38,6 +39,19 @@ module.exports = {
         }
     },
 
+    categories: async () => {
+        try {
+            const categoriesFetched = await Category.find()
+            return categoriesFetched.map(category => {
+                return {
+                    ...category._doc,
+                }
+            })
+        } catch (error) {
+            throw error
+        }
+    },
+
     createArticle: async args => {
         try {
             const { title, body } = args.article
@@ -47,6 +61,21 @@ module.exports = {
             })
             const newArticle = await article.save()
             return { ...newArticle._doc, _id: newArticle.id }
+        } catch (error) {
+            throw error
+        }
+    },
+
+    createCategory: async args => {
+        try {
+            const { title, url } = args.category
+            const category = new Category({
+                title,
+                url
+            })
+            const newCategory = await category.save()
+            return { ...newCategory._doc}
+
         } catch (error) {
             throw error
         }

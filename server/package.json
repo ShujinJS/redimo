@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend for redimo-app",
+  "main": "apollo.server.js",
+  "dependencies": {
+    "apollo-server": "^3.6.1",
+    "express": "^4.17.2",
+    "express-graphql": "^0.12.0",
+    "mongoose": "^6.1.5",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/apollo.server"
+  },
+  "author": "",
+  "license": "ISC"
+}

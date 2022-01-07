@@ -1,6 +1,5 @@
 const { buildSchema } = require("graphql");
 
-
 /*
     : "_id" MongoDB'den dolayı bu şekilde yazılmalı
 
@@ -17,8 +16,45 @@ const { buildSchema } = require("graphql");
     Mongoose Models oluşturulmalı.
 
 */
+
 module.exports = buildSchema(`
+
+    type SiteNav {
+        siteLanguages: [SiteLanguage!]
+    }
+
+    type SiteLanguage {
+        title: String!
+        navigations: [Navigation!]
+    }
+
+    type Navigation {
+        title: String!
+        navLinks: [NavLink!]
+    }
+
+    type NavLink {
+        title: String!
+        toggled: Boolean
+        url: String
+        categories: [Category]
+    }
+
     
+
+    type Category {
+        title: String!
+        url: String!
+    }
+
+    input CategoryInput {
+        title: String!
+        url: String!          
+    }
+
+    
+        
+
     type Article {
         _id: ID!
         title: String!
@@ -33,10 +69,12 @@ module.exports = buildSchema(`
 
     type Query {
         articles: [Article!]
+        categories: [Category!]
     }
 
     type Mutation {
         createArticle(article: ArticleInput): Article
+        createCategory(category: CategoryInput): Category
     }
 
     schema {
