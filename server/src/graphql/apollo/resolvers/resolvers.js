@@ -1,4 +1,3 @@
-const Article = require('../../../models/article');
 const Category = require('../../../models/category');
 
 /*
@@ -24,61 +23,22 @@ const Category = require('../../../models/category');
  */
 
 module.exports = {
-    articles: async () => {
-        try {
-            const articlesFetched = await Article.find()
-            return articlesFetched.map(article => {
-                return {
-                    ...article._doc,
-                    _id: article.id,
-                    createdAt: new Date(article._doc.createdAt).toISOString()
-                }
-            })
-        } catch (error) {
-            throw error
-        }
-    },
-
-    categories: async () => {
-        try {
-            const categoriesFetched = await Category.find()
-            return categoriesFetched.map(category => {
-                return {
-                    ...category._doc,
-                }
-            })
-        } catch (error) {
-            throw error
-        }
-    },
-
-    createArticle: async args => {
-        try {
-            const { title, body } = args.article
-            const article = new Article({
-                title,
-                body
-            })
-            const newArticle = await article.save()
-            return { ...newArticle._doc, _id: newArticle.id }
-        } catch (error) {
-            throw error
-        }
-    },
-
-    createCategory: async args => {
-        try {
-            const { title, url } = args.category
-            const category = new Category({
-                title,
-                url
-            })
-            const newCategory = await category.save()
-            return { ...newCategory._doc}
-
-        } catch (error) {
-            throw error
+    
+    Query: {
+        categories: async () => {
+            try {
+                const categoriesFetched = await Category.find()
+                return categoriesFetched.map(category => {
+                    return {
+                        ...category._doc,
+                    }
+                })
+            } catch (error) {
+                throw error
+            }
         }
     }
+
+
 }
 

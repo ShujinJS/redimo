@@ -2,10 +2,6 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
 
-    type Query {
-        categories: [Category]
-    }
-
     type NavLink {
         title: String!
         toggled: Boolean
@@ -14,8 +10,13 @@ const typeDefs = gql`
     }
 
     type Category {
+        _id: ID!
         title: String!
         url: String!
+    }
+
+    type Query {
+        categories: [Category]
     }
 `;
 
