@@ -1,4 +1,6 @@
 const Category = require('../../../models/category');
+const User = require('../../../models/user');
+
 
 /*
     resolver: GraphQL query'sinden gelen response'u oluşturmak için yardımcı olan function'ların bir collection'ıdır.
@@ -30,9 +32,40 @@ module.exports = {
                 const categoriesFetched = await Category.find()
                 return categoriesFetched.map(category => {
                     return {
-                        ...category._doc,
+                        ...category._doc
                     }
                 })
+            } catch (error) {
+                throw error
+            }
+        },
+        users: async args => {
+            try {
+                console.log(args)
+                const userFetched = await User.find()
+                return userFetched.map(user => {
+                    return {
+                        ...user._doc,
+                        name: user.name
+                    }
+                })
+            } catch (error) {
+                throw error
+            }
+        }
+    },
+
+    Mutation: {
+        createCategory: async args => {
+            console.log(args)
+            try {
+                const { title, url } = args.category
+                const category = new Category({
+                    title,
+                    url
+                })
+                const newCategory = await category.save()
+                return { ...newCategory._doc, _id: newCategory.id }
             } catch (error) {
                 throw error
             }

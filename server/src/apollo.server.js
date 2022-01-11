@@ -2,11 +2,9 @@ const { ApolloServer, gql } = require('apollo-server');
 const typeDefs = require('./graphql/apollo/schema/schema');
 const resolvers = require('./graphql/apollo/resolvers/resolvers');
 
-
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({ typeDefs, resolvers });
-
 const port = 3008;
 
 const mongoose = require("mongoose");

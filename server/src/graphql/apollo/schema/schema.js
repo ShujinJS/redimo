@@ -15,8 +15,37 @@ const typeDefs = gql`
         url: String!
     }
 
+    input CategoryInput {
+        title: String!
+        url: String!
+    }
+
+    type User {
+        _id: ID!
+        name: String!
+    }
+
+    type UserUpdateResponse {
+        success: Boolean!
+        message: String
+        users: [User]
+    }
+
+    input UserInput {
+        _id: ID!
+        name: String!
+    }
+
+    
+
     type Query {
         categories: [Category]
+        users: [User]
+    }
+
+    type Mutation {
+        createCategory(category: CategoryInput): Category
+        createUser(user: UserInput): User
     }
 `;
 

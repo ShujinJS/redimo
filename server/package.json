@@ -4,11 +4,13 @@
   "description": "backend for redimo-app",
   "main": "apollo.server.js",
   "dependencies": {
+    "apollo-datasource-mongodb": "^0.5.2",
     "apollo-server": "^3.6.1",
     "express": "^4.17.2",
     "express-graphql": "^0.12.0",
     "mongoose": "^6.1.5",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "realm": "^10.11.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
