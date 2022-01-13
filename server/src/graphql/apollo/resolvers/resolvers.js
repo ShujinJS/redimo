@@ -1,28 +1,6 @@
 const Category = require('../../../models/category');
-const User = require('../../../models/user');
-
-
-/*
-    resolver: GraphQL query'sinden gelen response'u oluşturmak için yardımcı olan function'ların bir collection'ıdır.
-
-    request'i alır ve geriye bir response döndürür.
-
-    herbir query ve mutation isminin resolver function ile eşleşmesi gerekir. Eğer articles adında bir querymiz varsa, articles() resolver function'ımız olmalı.
-*/
-
-/*
-    GraphQL schemamızda "articles" adında articles'tan oluşan bir array döndüren bir querymiz var. Dolayısıyla aynı isimde bir resolver'ımız olmalı.
-
-    articles function mongoose'un oluşturduğu modeli kullanır, böylece ".find()" methoduna erişimimiz sağlanıyor.
-
-    gelen data bir array, map ile dönerek herbir objecti alıyoruz, _id'yi mongoose ile override ederek createdAt alanını daha kullanıcı dostu bir tarihe çeviriyoruz.
-
-    gelen datayı kaydetmek için "save()" helper methodu kullanıyoruz.
-    MongoDB'den gelen response bazı metadata içeriyor, bu yüzden "_doc" property direkt olarak return edildi.
-
-    Böylece schema ve resolvers GraphQL API için hazırlandı.
-    Ardından server ve endpoint oluşturulacak.
- */
+const Movie = require('../../../models/movie.model');
+const Clothe = require('../../../models/clothe.model');
 
 module.exports = {
     
@@ -39,20 +17,47 @@ module.exports = {
                 throw error
             }
         },
-        users: async args => {
-            try {
-                console.log(args)
-                const userFetched = await User.find()
-                return userFetched.map(user => {
-                    return {
-                        ...user._doc,
-                        name: user.name
-                    }
+
+        // Tüm movies getir
+        getMovies: (root) => {
+            return new Promise((resolve, reject) => {
+                Movie.find((err, movies) => {
+                    if(err) reject(err);
+                    else resolve(movies);
                 })
-            } catch (error) {
-                throw error
-            }
+            })
+        },
+
+        // Bir movie bul
+        findMovie: (root, {_id}) => {
+            return new Promise((resolve, reject) => {
+                Movie.findOne({_id: _id}, (err, movie) => {
+                    if(err) reject(err);
+                    else resolve(movie);
+                })
+            })
+        },
+
+        // Tüm clothing getir
+        getClothes: (root) => {
+            return new Promise((resolve, reject) => {
+                Clothe.find((err, clothes) => {
+                    if(err) reject(err);
+                    else resolve(clothes);
+                })
+            })
+        },
+
+        // Bir cloth bul
+        findClothe: (root, {_id}) => {
+            return new Promise((resolve, reject) => {
+                Clothe.findOne({_id: _id}, (err, clothe) => {
+                    if(err) reject(err);
+                    else resolve(clothe);
+                })
+            })
         }
+
     },
 
     Mutation: {
@@ -69,9 +74,71 @@ module.exports = {
             } catch (error) {
                 throw error
             }
+        },
+
+        // Movie oluştur
+        createMovie: (root, { input }) => {
+            const newMovie = new Movie({
+                topic: input.topic,
+                title: input.title,
+                price: input.price,
+                imageUrl: input.imageUrl,
+                shippingFee: input.shippingFee
+            });
+
+            newMovie._id = input._id;
+
+            return new Promise((resolve, reject) => {
+                newMovie.save((err) => {
+                    if(err) reject(err);
+                    else resolve(newMovie)
+                })
+            })
+        },
+
+        createClothe: (root, { input }) => {
+            const newClothe = new Clothe({
+                topic: input.topic,
+                brand: input.brand,
+                title: input.title,
+                price: input.price,
+                gender: input.gender,
+                imageUrl: input.imageUrl,
+                shippingFee: input.shippingFee
+            });
+
+            newClothe._id = input._id;
+
+            return new Promise((resolve, reject) => {
+                newClothe.save((err) => {
+                    if(err) reject(err);
+                    else resolve(newClothe)
+                })
+            })
+        },
+
+        // Bir cloth ekle
+        addClothe: (root, { cloth }) => {
+            const newClothe = new Clothe({
+                topic: cloth.topic,
+                brand: cloth.brand,
+                title: cloth.title,
+                price: cloth.price,
+                gender: cloth.gender,
+                imageUrl: cloth.imageUrl,
+                shippingFee: cloth.shippingFee
+            });
+
+            newClothe._id = cloth._id;
+
+            return new Promise((resolve, reject) => {
+                newClothe.save(err => {
+                    if(err) reject(err);
+                    else resolve(newClothe)
+                })
+            })
         }
     }
-
 
 }
 
