@@ -20,7 +20,7 @@ export default function FooterComponent(){
         },
         {
             title: "React.js",
-            url: "https://cdn.freelogovectors.net/wp-content/uploads/2018/12/react_logo.png"
+            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png"
         },
         {
             title: "Redux",

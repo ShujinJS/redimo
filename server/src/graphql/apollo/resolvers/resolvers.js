@@ -1,22 +1,9 @@
-const Category = require('../../../models/category');
 const Movie = require('../../../models/movie.model');
 const Clothe = require('../../../models/clothe.model');
 
 module.exports = {
     
     Query: {
-        categories: async () => {
-            try {
-                const categoriesFetched = await Category.find()
-                return categoriesFetched.map(category => {
-                    return {
-                        ...category._doc
-                    }
-                })
-            } catch (error) {
-                throw error
-            }
-        },
 
         // Tüm movies getir
         getMovies: (root) => {
@@ -61,20 +48,6 @@ module.exports = {
     },
 
     Mutation: {
-        createCategory: async args => {
-            console.log(args)
-            try {
-                const { title, url } = args.category
-                const category = new Category({
-                    title,
-                    url
-                })
-                const newCategory = await category.save()
-                return { ...newCategory._doc, _id: newCategory.id }
-            } catch (error) {
-                throw error
-            }
-        },
 
         // Movie oluştur
         createMovie: (root, { input }) => {
@@ -118,18 +91,18 @@ module.exports = {
         },
 
         // Bir cloth ekle
-        addClothe: (root, { cloth }) => {
+        addClothe: (root, { clothe }) => {
             const newClothe = new Clothe({
-                topic: cloth.topic,
-                brand: cloth.brand,
-                title: cloth.title,
-                price: cloth.price,
-                gender: cloth.gender,
-                imageUrl: cloth.imageUrl,
-                shippingFee: cloth.shippingFee
+                topic: clothe.topic,
+                brand: clothe.brand,
+                title: clothe.title,
+                price: clothe.price,
+                gender: clothe.gender,
+                imageUrl: clothe.imageUrl,
+                shippingFee: clothe.shippingFee
             });
 
-            newClothe._id = cloth._id;
+            newClothe._id = clothe._id;
 
             return new Promise((resolve, reject) => {
                 newClothe.save(err => {

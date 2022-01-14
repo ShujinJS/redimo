@@ -25,8 +25,7 @@ import FooterComponent from "./components/footer-component/footer.component";
 // Pages
 import LoginPage from "./pages/AuthPage/login/login.component";
 import RegisterPage from "./pages/AuthPage/register/register.component";
-
-
+import HomePage from "./pages/HomePage/home.page";
 
 // Firebase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -72,17 +71,19 @@ function App() {
 
   return (
     <Router>
-      <div className={`sidenav-holder ${sideNavToggled ? "toggled-on-sidenav" : "toggled-off-sidenav"}`}>
-        <SideNavComponent currentUser={currentUser} siteLogo={siteLogo}/>
-      </div>
-      <NavComponent currentUser={currentUser} siteLogo={siteLogo} userLogo={userLogo}/>
 
-      <Routes>
-        <Route path="/login" element={<LoginPage userLogo={userLogo}/>}></Route>
-        <Route path="/register" element={<RegisterPage/>}></Route>
-      </Routes>
-      <FooterComponent/>
-      {/* <ThemeComponent/> */}
+        <div className={`sidenav-holder ${sideNavToggled ? "toggled-on-sidenav" : "toggled-off-sidenav"}`}>
+          <SideNavComponent currentUser={currentUser} siteLogo={siteLogo}/>
+        </div>
+        <NavComponent currentUser={currentUser} siteLogo={siteLogo} userLogo={userLogo}/>
+        <Routes>
+          <Route path="/movies" element={<HomePage/>}/>
+          <Route path="/login" element={<LoginPage userLogo={userLogo}/>}></Route>
+          <Route path="/register" element={<RegisterPage/>}></Route>
+        </Routes>
+        <FooterComponent/>
+        {/* <ThemeComponent/> */}
+
     </Router>
   );
 }

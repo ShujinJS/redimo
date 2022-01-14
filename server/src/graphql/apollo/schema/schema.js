@@ -2,18 +2,6 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-    "Category"
-    type Category {
-        _id: ID!
-        title: String!
-        url: String!
-    }
-
-    input CategoryInput {
-        title: String!
-        url: String!
-    }
-
     "Movie"
     type Movie {
         _id: ID!
@@ -67,7 +55,6 @@ const typeDefs = gql`
 
     "Query"
     type Query {
-        categories: [Category]
         getMovies: [Movie]
         findMovie(_id: ID!): Movie
         getClothes: [Clothe]
@@ -76,7 +63,6 @@ const typeDefs = gql`
 
     "Mutation"
     type Mutation {
-        createCategory(category: CategoryInput): Category
         createMovie(input: MovieInput): Movie
         addMovie(movie: MovieInput): Movie
         createClothe(input: ClotheInput): Clothe

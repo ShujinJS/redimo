@@ -11,12 +11,27 @@ import {appStore} from "./redux/appStore";
 // ContextAPI
 import {MainContextProvider} from "./context/main-context/main.context"
 
+// Apollo
+import { 
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache()
+});
+
 ReactDOM.render(
-  <Provider store={appStore}>
-    <MainContextProvider>
-      <App />
-    </MainContextProvider>
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider store={appStore}>
+      <MainContextProvider>
+        <App/>
+      </MainContextProvider>
+    </Provider>
+  </ApolloProvider>
+  ,
   document.getElementById('root')
 );
 
