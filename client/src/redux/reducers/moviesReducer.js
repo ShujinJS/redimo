@@ -1,9 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 
 let initState = {
-    loading: true,
+    loading: {},
     movies: [],
-    error: ""
+    error: {}
 }
 
 export default function moviesReducer(state = initState, action){
@@ -11,19 +11,19 @@ export default function moviesReducer(state = initState, action){
     switch (action.type) {
         case actionTypes.ACTION_TYPE_FETCH_MOVIES_REQUEST:
             return {
-                loading: state.loading = true
+                ...state,
+                loading: action.payload
             }
         
         case actionTypes.ACTION_TYPE_FETCH_MOVIES_SUCCESS:
             return {
-                loading: false,
+                ...state, 
                 movies: action.payload
             }
         
         case actionTypes.ACTION_TYPE_FETCH_MOVIES_FAILURE:
             return {
-                loading: false,
-                movies: [],
+                ...state,
                 error: action.payload
             }
         default:

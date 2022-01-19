@@ -14,6 +14,11 @@ const movieSchema = new Schema(
         },
 
         price: {
+            type: String,
+            required: true
+        },
+
+        stock: {
             type: Number,
             required: true
         },

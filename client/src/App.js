@@ -3,29 +3,21 @@ import {useState, useEffect, useContext} from "react";
 // Styling
 import './App.css';
 import "./components/theme/theme.component.style.scss";
-
-// ContextAPI
-import { MainContext } from "./context/main-context/main.context";
-
-
 // Logos
 import siteLogo from "./sitelogo.png";
 import userLogo from "./logos/userlogo.png";
 
 
-// Routing
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
+// ContextAPI
+import { MainContext } from "./context/main-context/main.context";
 
 // Components
 import ThemeComponent from "./components/theme/theme.component";
 import NavComponent from "./components/nav-component/nav.component";
 import SideNavComponent from "./components/nav-component/side-nav-component/side.nav.component";
+import MainContentComponent from "./components/main-content-component/main.content.component";
 import FooterComponent from "./components/footer-component/footer.component";
-
-// Pages
-import LoginPage from "./pages/AuthPage/login/login.component";
-import RegisterPage from "./pages/AuthPage/register/register.component";
-import HomePage from "./pages/HomePage/home.page";
 
 // Firebase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
@@ -70,21 +62,19 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    
+    <>
+      <div className={`sidenav-holder ${sideNavToggled ? "toggled-on-sidenav" : "toggled-off-sidenav"}`}>
+        <SideNavComponent currentUser={currentUser} siteLogo={siteLogo}/>
+      </div>
+      <NavComponent currentUser={currentUser} siteLogo={siteLogo} userLogo={userLogo}/>
+      <MainContentComponent/>
+      <FooterComponent/>
+      {/* <ThemeComponent/> */}
+    </>
 
-        <div className={`sidenav-holder ${sideNavToggled ? "toggled-on-sidenav" : "toggled-off-sidenav"}`}>
-          <SideNavComponent currentUser={currentUser} siteLogo={siteLogo}/>
-        </div>
-        <NavComponent currentUser={currentUser} siteLogo={siteLogo} userLogo={userLogo}/>
-        <Routes>
-          <Route path="/movies" element={<HomePage/>}/>
-          <Route path="/login" element={<LoginPage userLogo={userLogo}/>}></Route>
-          <Route path="/register" element={<RegisterPage/>}></Route>
-        </Routes>
-        <FooterComponent/>
-        {/* <ThemeComponent/> */}
 
-    </Router>
+
   );
 }
 

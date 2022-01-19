@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Routing
+import { BrowserRouter } from "react-router-dom";
+
 // Redux
 import {Provider} from "react-redux";
 import {appStore} from "./redux/appStore";
@@ -24,13 +27,15 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Provider store={appStore}>
-      <MainContextProvider>
-        <App/>
-      </MainContextProvider>
-    </Provider>
-  </ApolloProvider>
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <Provider store={appStore}>
+        <MainContextProvider>
+          <App/>
+        </MainContextProvider>
+      </Provider>
+    </ApolloProvider>
+  </BrowserRouter>
   ,
   document.getElementById('root')
 );

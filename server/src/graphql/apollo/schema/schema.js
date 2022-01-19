@@ -5,19 +5,21 @@ const typeDefs = gql`
     "Movie"
     type Movie {
         _id: ID!
-        topic: String!
+        topic: String
         title: String!
-        price: Int!
+        price: String!
         imageUrl: String!
-        shippingFee: ShippingFee
+        stock: Int!
+        shippingFee: String
     }
 
     input MovieInput {
-        topic: String!
+        topic: String
         title: String!
-        price: Int!
+        price: String!
         imageUrl: String!
-        shippingFee: ShippingFee
+        stock: Int!
+        shippingFee: String
     }
 
     "Clothing"
@@ -26,20 +28,22 @@ const typeDefs = gql`
         topic: String!
         brand: String
         title: String!
-        price: Int!
+        price: String!
         gender: Gender
         imageUrl: String!
-        shippingFee: ShippingFee
+        stock: Int!
+        shippingFee: String
     }
 
     input ClotheInput {
         topic: String!
         brand: String
         title: String!
-        price: Int!
+        price: String!
         gender: Gender
         imageUrl: String!
-        shippingFee: ShippingFee
+        stock: Int!
+        shippingFee: String
     }
 
     "enum"
@@ -49,8 +53,8 @@ const typeDefs = gql`
     }
 
     enum ShippingFee {
-        FREE
-        COST
+        EXIMIO
+        FEE
     }
 
     "Query"

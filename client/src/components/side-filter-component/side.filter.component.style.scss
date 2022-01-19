@@ -1,0 +1,31 @@
+// colors
+$nav-dark-bg: #222222;
+$base-color: rgb(68, 227, 248);
+$dark-color: #a1a1a1;
+$dark-hover-color: #e6e6e6;
+
+// transition
+$fast-transition: all 0.3s linear;
+
+// mixins
+@mixin flex-column-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin flex-center-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sideContainer{
+    width: 10%;
+    height: 400px;
+    border: 1px solid none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    transition: $fast-transition;
+}

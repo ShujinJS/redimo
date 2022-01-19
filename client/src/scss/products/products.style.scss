@@ -1,0 +1,249 @@
+.content-container{
+    width: 100%;
+    height: 100%;
+
+    .item-list{
+        width: inherit;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 14px;
+
+        li{
+           width: 220px;
+           height: 420px;
+           overflow: hidden;
+        }
+        
+        .product-card-container{
+            width: 220px;
+            height: 365px;
+            display: flex;
+            transition: all 0.1s linear;
+
+            .product-card{
+                width: 100%;
+                height: 385px;
+                margin: 15px;
+                padding: 8px;
+                display: flex;
+                overflow: hidden;
+                flex-direction: column;
+                justify-content: space-around;
+                text-align: center;
+                border: 1px solid none;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: all 0.3s linear;
+
+                &:hover{
+                    border: 1px solid none;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    border-radius: 5px;
+                }
+
+                .product-image {
+                    width: 100%;
+                    height: 220px;
+                    display: flex;
+                    justify-content: center;
+                    border: 1px solid none;
+                    border-radius: 10px;
+                    transition: all 1s linear;
+
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        mix-blend-mode: multiply;
+                        object-fit: cover;
+                        transition: all 0.8s ease;  
+                    }
+                }
+
+                .product-title-holder{
+                    font-size: 0.9em;
+                    height: 34px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    .product-stock{
+                        width: 120px;
+                        position: absolute;
+                        margin-top: -230px;
+                        margin-left: 60px;
+                        border: 1px solid none;
+                        border-radius: 10px;
+                        padding: 4px;
+                        transform:rotate(35deg);
+                    }
+
+                    .product-shipping{
+                        position: absolute;
+                        margin-top: -45px;
+                        margin-left: 104px;
+                        border: 1px solid none;
+                        border-radius: 10px;
+                        background-color: green;
+                        color: white;
+                        padding: 3px 6px;
+                    }
+                }
+
+                .product-price-group{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
+
+                    button{
+                        cursor: pointer;
+                    }
+                }
+
+
+
+                .fav-btn{
+                    width: 40px;
+                    height: 40px;
+                    font-size: 20px;
+                    color: rgb(199, 52, 96);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: none;
+                    position: absolute;
+                    margin-top: -290px;
+                    margin-left: 180px;
+                    border: 1px solid rgb(199, 52, 96);
+                    border-radius: 50%;
+                    transition: all 0.3s linear;
+                    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+                    &:hover{
+                        animation: heartbeat 1.5s infinite;
+                    }
+
+                    &:active{
+                        background-color: red;
+                        color: #f3f3f3;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+.product-price{
+    width: 70%;
+    font-size: 20px;
+    text-decoration: line-through;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 auto;
+}
+
+.discounted{
+    color: rgb(115, 187, 7);
+    text-decoration: none;
+}
+
+.percentage{
+    position: relative;
+    top: -5px;
+}
+
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( .75 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( .75 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( .75 );
+  }
+  100%
+  {
+    transform: scale( .75 );
+  }
+}
+
+ 
+
+
+/* ----- Ribbon Container ---------------------------------------*/ 
+.corner-ribbon > div {
+    height     : 105px;
+    width      : 200px;
+    position   : absolute;
+    margin-left: -8px;
+    margin-top : -247px;
+    overflow   : hidden;
+    font-size: 14px;
+    line-height: 16px;
+    color: rgb(65, 65, 65);
+    background : transparent;
+
+
+    /* ----- Top Curl ---------------------------------------*/ 
+    &::before{
+    content               : "";
+    display               : block;
+    -webkit-border-radius : 10px 10px 0px 0px;
+    border-radius         : 10px 10px 0px 0px;
+    width                 : 20px;
+    height                : 10px;
+    position              : absolute;
+    right                 : 86px;
+    background: rgb(235,205,35);
+    background: linear-gradient(90deg, rgba(235,205,35,1) 0%, rgba(0,0,0,1) 83%);
+
+    }
+
+    /* ----- Right Curl ---------------------------------------*/ 
+    &::after{
+        content               : "";
+        display               : block;
+        -webkit-border-radius : 0px 10px 10px 0px;
+        border-radius         : 0px 10px 10px 0px;
+        width                 : 10px;
+        height                : 20px;
+        position              : absolute;
+        right                 : 0px;
+        top                   : 85px;
+        background: rgb(235,205,35);
+        background: linear-gradient(90deg, rgba(235,205,35,1) 0%, rgba(0,0,0,1) 83%);
+    }
+
+    /* ----- Ribbon ---------------------------------------*/ 
+    div{
+        width              : 200px;
+        height             : 16px;
+        position           : relative;
+        top                : 30px;
+        right              : -50px;
+        z-index            : 1;
+        overflow           : hidden;
+        transform          :rotate(45deg);
+        -ms-transform      :rotate(45deg); /* IE 9 */
+        -moz-transform     :rotate(45deg); /* Firefox */
+        -webkit-transform  :rotate(45deg); /* Safari and Chrome */
+        -o-transform       :rotate(45deg); /* Opera */
+        background: rgb(235, 205, 35);	
+    }
+
+}

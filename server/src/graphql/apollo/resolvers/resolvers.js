@@ -2,8 +2,9 @@ const Movie = require('../../../models/movie.model');
 const Clothe = require('../../../models/clothe.model');
 
 module.exports = {
-    
+
     Query: {
+
 
         // Tüm movies getir
         getMovies: (root) => {
@@ -56,6 +57,7 @@ module.exports = {
                 title: input.title,
                 price: input.price,
                 imageUrl: input.imageUrl,
+                stock: input.stock,
                 shippingFee: input.shippingFee
             });
 
@@ -77,6 +79,7 @@ module.exports = {
                 price: input.price,
                 gender: input.gender,
                 imageUrl: input.imageUrl,
+                stock: input.stock,
                 shippingFee: input.shippingFee
             });
 
@@ -99,6 +102,7 @@ module.exports = {
                 price: clothe.price,
                 gender: clothe.gender,
                 imageUrl: clothe.imageUrl,
+                stock: clothe.stock,
                 shippingFee: clothe.shippingFee
             });
 
