@@ -13,6 +13,26 @@ const movieSchema = new Schema(
             required: true
         },
 
+        genre: {
+            type: String,
+            required: false
+        },
+
+        director: {
+            type: String,
+            required: false
+        },
+
+        duration: {
+            type: String,
+            required: false
+        },
+
+        year: {
+            type: String,
+            required: false
+        },
+
         price: {
             type: String,
             required: true
@@ -30,6 +50,11 @@ const movieSchema = new Schema(
 
         shippingFee: {
             type: String,
+            required: false
+        },
+
+        discount: {
+            type: Number,
             required: false
         }
     }

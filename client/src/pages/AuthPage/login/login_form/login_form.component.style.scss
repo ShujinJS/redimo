@@ -10,6 +10,7 @@
         width: 90%;
         height: 20px;
         margin: 0 auto;
+        margin-bottom: 5px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
@@ -60,17 +61,6 @@ form div span{
 label{
     font-size: 0.8em;
     line-height: 0.8em;
-}
-
-#submitBtn{
-    width: 70%;
-    height: 35px;
-    font-weight: 700;
-    margin: 0 auto;
-    border: none;
-    color: #222222;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 a{

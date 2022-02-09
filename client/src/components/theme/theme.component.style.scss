@@ -7,6 +7,7 @@ $footer-dark-bg: #2a2a2a;
 $dark-color: #a1a1a1;
 $dark-hover-color: #e6e6e6;
 $dark-logo-color: rgb(68, 227, 248);
+$dark-logo-hover-color: rgb(49, 160, 175);
 
 
 // light-theme
@@ -18,10 +19,14 @@ $footer-light-bg: #e7e7e7;
 $light-color: rgb(161, 161, 161);
 $light-hover-color: #494949;
 $light-logo-color: rgb(235, 205, 35);
+$light-logo-hover-color: rgb(207, 182, 40);
 
 // transition
 $fast-transition: all 0.3s linear;
 
+.fast-trans{
+    transition: $fast-transition;
+}
 
 .site-back-cover{
     width: 100%;
@@ -37,7 +42,6 @@ $fast-transition: all 0.3s linear;
 
 .logo-light{
     color: $light-logo-color;
-    
 }
 
 .font-dark{
@@ -82,10 +86,12 @@ $fast-transition: all 0.3s linear;
 
 .sidenav-bg-dark{
     background-color: $sidenav-dark-bg;
+    transition: $fast-transition;
 }
 
 .sidenav-bg-light{
     background-color: $sidenav-light-bg;
+    transition: $fast-transition;
 }
 
 .sidenav-link-dark{
@@ -240,5 +246,22 @@ $fast-transition: all 0.3s linear;
     
     @media only screen and (min-width: 1000px){
         display: none;
+    }
+}
+
+.submit-btn-dark{
+    background-color: $dark-logo-color;
+    transition: $fast-transition;
+    &:hover{
+        background-color: $dark-logo-hover-color;
+    }
+}
+
+.submit-btn-light{
+    background-color: $light-logo-color;
+    transition: $fast-transition;
+
+    &:hover{
+        background-color: $light-logo-hover-color;
     }
 }

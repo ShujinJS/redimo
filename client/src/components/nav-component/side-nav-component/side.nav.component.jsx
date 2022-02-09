@@ -1,21 +1,17 @@
 import { useContext } from "react";
-
 // Syling
 import "./side.nav.component.style.scss";
 import "../../theme/theme.component.style.scss";
-
 // Logos
 import siteLogo from "../../../sitelogo.png";
-
 // Routing
 import { Link } from "react-router-dom";
-
 // ContextAPI
 import { MainContext } from "../../../context/main-context/main.context";
-
+// Apollo Custom Hooks
+import useGetSiteLanguages from "../../../Apollo/hooks/Languages/useGetSiteLanguages"
 // Firebase
 import { auth } from '../../../firebase/firebase.utils';
-
 //Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleLeft, faBars, faSearch } from  "@fortawesome/free-solid-svg-icons";
@@ -23,107 +19,8 @@ import { faAngleDown, faAngleLeft, faBars, faSearch } from  "@fortawesome/free-s
 export default function SideNavComponent(props){
 
     let {currentUser, siteLogo} = props;
-
-    let navLinks = {
-        
-        siteLanguages: [
-                {
-                    title: "TR",
-                    content: [
-
-                        {
-                            title: "middleNav",
-                            content: [
-                                {
-                                    title: "Kategoriler",
-                                    toggled: true,
-                                    url: "categories", 
-                                    categories: [
-                                        {
-                                            title: "Filmler", 
-                                            url: "movies"
-                                        },
-                                        {
-                                            title: "Kitaplar",
-                                            url: "books"
-                                        },
-                                        {
-                                            title: "Giyim",
-                                            url: "clothing"
-                                        }
-                                    ]
-                                },
-                                {
-                                    title: "Tüm Ürünler", 
-                                    url:"collections"
-                                }
-                            ]
-                        },
-                        {
-                            title: "userNav",
-                            content: [
-                                {
-                                    title: "Giriş Yap",
-                                    url: "login"
-                                },
-                                {
-                                    title: "Çıkış Yap",
-                                    url: ""
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    title: "ENG",
-                    content: [
-
-                        {
-                            title: "middleNav",
-                            content: [
-                                {
-                                    title: "Categories",
-                                    toggled: true,
-                                    url: "categories", 
-                                    categories: [
-                                        {
-                                            title: "Movies", 
-                                            url: "movies"
-                                        },
-                                        {
-                                            title: "Books",
-                                            url: "books"
-                                        },
-                                        {
-                                            title: "Clothing",
-                                            url: "clothing"
-                                        }
-                                    ]
-                                },
-                                {
-                                    title: "Collections", 
-                                    url:"collections"
-                                }
-                            ]
-                        },
-                        {
-                            title: "userNav",
-                            content: [
-                                {
-                                    title: "Log-in",
-                                    url: "login"
-                                },
-                                {
-                                    title: "Sign-out",
-                                    url: ""
-                                }
-                            ]
-                        }
-                    ]
-                },               
-        ]
-        
-    };
+    let { loading, error, data } = useGetSiteLanguages();
+    console.log(data)
 
     const mainContext = useContext(MainContext);
     const darkMode = mainContext.state.darkMode;
@@ -148,8 +45,10 @@ export default function SideNavComponent(props){
         // })}
     }
 
-
-    return (
+    if(loading) return "Loading...";
+    if(error) return `Bir hata meydana geldi: ${error}`;
+    if(data) return (
+        
         <div id="sideNavContainer" className={`${darkMode ? "sidenav-bg-dark font-dark" : "sidenav-bg-light font-light"}`}>
 
             <div id="sideNavGroup">
@@ -176,9 +75,9 @@ export default function SideNavComponent(props){
                 <ul id="sideNavList">
                     
                 {/* Sitenin dil seçeneğine göre API'den gelen data "middleNav" ise linkleri getir.*/}                                
-                {navLinks ?
+                {data ?
 
-                navLinks.siteLanguages.map(firstLvl => {
+                data.getSiteLanguages.map(firstLvl => {
                 return (
                 <>
                 {siteLanguage == firstLvl.title
@@ -199,10 +98,10 @@ export default function SideNavComponent(props){
                                 </div> : ""}                                
                             </div>
                 
-                            {thirdLvl.categories && thirdLvl.toggled ? 
+                            {thirdLvl.content && thirdLvl.toggled ? 
                             <>
                             <ul>
-                                {thirdLvl.categories.map(category => {
+                                {thirdLvl.content.map(category => {
                                     return (
                                         <>
                                         <li><Link to={category.url}>
@@ -232,8 +131,8 @@ export default function SideNavComponent(props){
                 {/* User Panel: Giriş yap */}
                 <div className={`user-panel-side ${darkMode ? "dark-color" : "light-color"}`}>
                         {
-                            navLinks ?
-                            navLinks.siteLanguages.map(firstLvl => {
+                            data ?
+                            data.getSiteLanguages.map(firstLvl => {
                                 return (
                                     <>
                                     {siteLanguage == firstLvl.title ?

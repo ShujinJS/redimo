@@ -1,19 +1,14 @@
 import { useState, useContext } from "react";
-
 // Styling
 import "./login_form.component.style.scss";
 import "../../../../components/theme/theme.component.style.scss";
 import "../../../../scss/authentication/authentication.common.style.scss";
-
 // Context API
 import { MainContext } from "../../../../context/main-context/main.context";
-
 // Routing
-import {Link, useNavigate} from "react-router-dom"
-
+import { useNavigate } from "react-router-dom"
 // Firebase
 import { auth, signInWithGoogle } from "../../../../firebase/firebase.utils";
-
 //Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faEnvelope, faUser } from  "@fortawesome/free-solid-svg-icons";
@@ -90,7 +85,8 @@ export default function FormGroup(props){
                     </div>
                     <a className={`${darkMode ? "logo-dark" : "logo-light"}`}>Parolamı Unuttum</a>
                 </div>
-                <input id="submitBtn" className={`input-style ${darkMode ? "sec-dark" : "sec-light"}`} type="submit" value="Giriş Yap"/>
+
+                <input className={`input-style submit-btn ${darkMode ? "submit-btn-dark" : "submit-btn-light"}`} type="submit" value="Giriş Yap"/>
 
                 <div className="sign-in-btn-group">
                     <button onClick={signInWithGoogle} className="sign-in-btn google-btn"></button>

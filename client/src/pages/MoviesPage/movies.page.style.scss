@@ -26,12 +26,10 @@ $fast-transition: all 0.3s linear;
     display: flex;
     justify-content: space-between;
 
-
-
-
     #moviesCollectionContainer{
         width: 85%;
         padding: 15px;
+        margin: 0 auto;
         display: inherit;
         justify-content: center;
         align-items: center;
@@ -39,5 +37,9 @@ $fast-transition: all 0.3s linear;
         border-radius: 10px;
         overflow: hidden;
         transition: $fast-transition;
+
+        @media only screen and (max-width: 700px){
+            width: 100%;
+        }
     }
 }

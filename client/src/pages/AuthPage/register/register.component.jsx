@@ -16,7 +16,9 @@ export default function RegisterPage(props){
         inputTypeE: "password",
         placeholderE:"Parola",
         inputTypeF: "password",
-        placeholderF:"Parola Doğrula"
+        placeholderF:"Parola Doğrula",
+        inputTypeG: "text",
+        placeholderG: "Doğum Tarihi"
     }
 
     return (

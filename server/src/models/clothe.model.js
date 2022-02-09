@@ -18,13 +18,18 @@ const clothSchema = new Schema(
             required: true
         },
 
-        price: {
-            type: String,
-            required: true
+        color: {
+            type: Array,
+            required: false
         },
 
-        stock: {
-            type: Number,
+        size: {
+            type: Array,
+            required: false
+        },
+
+        price: {
+            type: String,
             required: true
         },
 
@@ -40,6 +45,11 @@ const clothSchema = new Schema(
 
         shippingFee: {
             type: String,
+            required: false
+        },
+        
+        discount: {
+            type: Number,
             required: false
         }
     }

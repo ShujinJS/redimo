@@ -8,9 +8,14 @@ const GET_MOVIES = gql`
       topic
       title
       price
+      genre
+      director
+      duration
+      year
       stock
       imageUrl
       shippingFee
+      discount
     }
   }
 `;

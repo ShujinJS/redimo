@@ -1,132 +1,29 @@
 import { useState, useContext } from "react";
-
 // Syling
 import "./bottom.nav.component.style.input.scss";
 import "../../theme/theme.component.style.scss";
-
-
 // Routing
 import {Link} from "react-router-dom";
-
+// Apollo Custom Hooks
+import useGetSiteLanguages from "../../../Apollo/hooks/Languages/useGetSiteLanguages";
 // Firebase
 import { auth } from '../../../firebase/firebase.utils';
-
 //Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from  "@fortawesome/free-solid-svg-icons";
-
 // Components
 // import SideNavComponent from "./side-nav-component/side.nav.component";
 import CartComponent from "../../cart-component/cart.component";
 import ThemeButtonComponent from "../../theme-button/theme.button.component";
-
 // ContextAPI
 import { MainContext } from "../../../context/main-context/main.context";
 
 function BottomNavComponent(props) {
 
     let {currentUser, siteLogo} = props;
+    let { loading, error, data } = useGetSiteLanguages();
 
-    let navLinks = {
-        
-        siteLanguages: [
-                {
-                    title: "TR",
-                    content: [
 
-                        {
-                            title: "middleNav",
-                            content: [
-                                {
-                                    title: "Kategoriler",
-                                    toggled: true,
-                                    url: "categories", 
-                                    categories: [
-                                        {
-                                            title: "Filmler", 
-                                            url: "movies"
-                                        },
-                                        {
-                                            title: "Kitaplar",
-                                            url: "books"
-                                        },
-                                        {
-                                            title: "Giyim",
-                                            url: "clothing"
-                                        }
-                                    ]
-                                },
-                                {
-                                    title: "Tüm Ürünler", 
-                                    url:"collections"
-                                }
-                            ]
-                        },
-                        {
-                            title: "userNav",
-                            content: [
-                                {
-                                    title: "Giriş Yap",
-                                    url: "login"
-                                },
-                                {
-                                    title: "Çıkış Yap",
-                                    url: ""
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    title: "ENG",
-                    content: [
-
-                        {
-                            title: "middleNav",
-                            content: [
-                                {
-                                    title: "Categories",
-                                    toggled: true,
-                                    url: "categories", 
-                                    categories: [
-                                        {
-                                            title: "Movies", 
-                                            url: "movies"
-                                        },
-                                        {
-                                            title: "Books",
-                                            url: "books"
-                                        },
-                                        {
-                                            title: "Clothing",
-                                            url: "clothing"
-                                        }
-                                    ]
-                                },
-                                {
-                                    title: "Collections", 
-                                    url:"collections"
-                                }
-                            ]
-                        },
-                        {
-                            title: "userNav",
-                            content: [
-                                {
-                                    title: "Log-in",
-                                    url: "login"
-                                },
-                                {
-                                    title: "Sign-out",
-                                    url: ""
-                                }
-                            ]
-                        }
-                    ]
-                },               
-        ]
-        
-    };
 
     // ContextAPI
     const mainContext = useContext(MainContext);
@@ -140,8 +37,10 @@ function BottomNavComponent(props) {
 
     }
 
+    if(loading) return "Loading...";
+    if(error) return `Bir hata meydana geldi: ${error}`;
+    if(data) return (
 
-    return (
         <div>
             <div className={`bot-nav-component ${darkMode ? "nav-bg-dark" : "bg-light"}`}>
                 <div className="bottom-main-container">
@@ -164,9 +63,9 @@ function BottomNavComponent(props) {
                             <ul id="navList">
                                 {/* Sitenin dil seçeneğine göre API'den gelen data "middleNav" ise linkleri getir.
                                 */}                                
-                                {navLinks ?
+                                {data ?
 
-                                navLinks.siteLanguages.map(firstLvl => {
+                                data.getSiteLanguages.map(firstLvl => {
                                     return (
                                     <>
                                        {siteLanguage == firstLvl.title
@@ -195,7 +94,7 @@ function BottomNavComponent(props) {
                             </ul>
                             <div className={`search-box search-box-bottom-nav ${darkMode ? "input-dark" : "input-light"}`}>
                                 <FontAwesomeIcon icon={faSearch}/>
-                                <input className={`search-input ${darkMode ? "font-dark" : "font-light"}`} type="search" placeholder="Ne arıyorsunuz?"/>
+                                <input className={`search-input ${darkMode ? "font-dark" : "font-light"}`} type="search" placeHolder="..."/>
                             </div>
                             <ThemeButtonComponent/>
 
@@ -209,8 +108,8 @@ function BottomNavComponent(props) {
                         Eğer API'den gelen uzantı "userNav" ise Giriş Yap ve Çıkış Yap butonlarını getir */}
                         <div className="user-panel-bottom-nav">
                         {
-                            navLinks ?
-                            navLinks.siteLanguages.map(firstLvl => {
+                            data ?
+                            data.getSiteLanguages.map(firstLvl => {
                                 return (
                                     <>
                                     {siteLanguage == firstLvl.title ?

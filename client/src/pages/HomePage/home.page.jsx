@@ -4,35 +4,45 @@ import useMovie from "../../Apollo/hooks/Movies/useFindMovie";
 // Apollo
 import { useMutation, gql } from "@apollo/client";
 import useGetMovies from "../../Apollo/hooks/Movies/useGetMovies";
+import useGetBooks from "../../Apollo/hooks/Books/useGetBooks";
 
-const CREATE_MOVIE = gql`
-    mutation ($input: MovieInput) {
+const CREATE_BOOK = gql`
+    mutation ($input: BookInput) {
         createMovie(input: $input) {
-            topic
-            title
-            price
-            imageUrl
-            stock
-            shippingFee
+          author
+          title
+          pages
+          publisher
+          publishDate
+          binding
+          price
+          stock
+          imageUrl
+          shippingFee
         }
     }
 `
 
 export default function HomePage() {
 
-  const [createAMovie, { loading, error, data }] = useMutation(CREATE_MOVIE, {
+  const [createABook, { loading, error, data }] = useMutation(CREATE_BOOK, {
     variables: {
       input:{
-        title: "Donnie Darko",
-        price: "11",
-        stock: 26,
-        imageUrl: "https://deff.com/image/magictoolbox_cache/feabb61ae2a71c1844359f7cbe8b5d82/4/0/40268_product/original/1893495658/Hzm3tzFQRd9EhHE8751NFQ.jpg",
+        author: "Stephen King",
+        title: "Yabancı | Outsider",
+        pages: "544",
+        publisher: "Altın Kitaplar",
+        publishDate: "2019",
+        binding: "Ciltsiz",
+        price: "60",
+        stock: 256,
+        imageUrl: "https://productimages.hepsiburada.net/s/26/1500/10170662092850.jpg",
         shippingFee: "9,90"
       }
     }
 });
 
-  const { pending, failure, content } = useGetMovies();
+  const { pending, failure, content } = useGetBooks();
    
 
     if(pending) return "Loading...";
@@ -40,14 +50,14 @@ export default function HomePage() {
     console.log(data)
     console.log(content);
 
-    if(content) return (
+     return (
         <div>
-            {content.getMovies.map(movie => { 
+            {/* {content.getBooks.map(book => { 
                 return (
-                    <span>{movie.title}</span>
+                    <span>{book.title}</span>
                 )
-            })}
-            <button onClick={() => createAMovie()}>Create a Movie</button>
+            })} */}
+            <button onClick={() => createABook()}>Create a Movie</button>
         </div>
     )
 }

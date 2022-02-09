@@ -4,12 +4,15 @@ const Schema = mongoose.Schema;
 const categorySchema = new Schema(
     {
         title: {
-            type: String,
-            required: true
+            type: String
         },
+
         url: {
-            type: String,
-            required: true
+            type: String
+        },
+
+        bgImageUrl: {
+            type: String
         }
     }
 )

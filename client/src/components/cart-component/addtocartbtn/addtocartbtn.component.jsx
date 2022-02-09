@@ -1,9 +1,9 @@
-import React from 'react'
-
+import { useEffect, useContext } from 'react';
+// Context API
+import { MainContext } from '../../../context/main-context/main.context';
+// Redux
 import {connect} from "react-redux";
-
 import "./addtocartbtn.component.style.scss";
-
 //Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from  "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,9 @@ import { faShoppingCart } from  "@fortawesome/free-solid-svg-icons";
 // import * as CartActions from "../../../redux/actions/cartActions";
 
 export default function AddToCartBtnComponent(props) {
+
+    const mainContext = useContext(MainContext);
+    const siteLanguage = mainContext.state.siteLanguage;
 
     // let {cartReducer, dispatch} = props;
 
@@ -23,7 +26,7 @@ export default function AddToCartBtnComponent(props) {
         <div>
             <button className="cart-btn">
                 {/* <FontAwesomeIcon icon={faShoppingCart}/>*/}
-                Sepete Ekle
+                {siteLanguage == "TR" ? `Sepete Ekle` : `Add to Cart`}
             </button>
         </div>
     )
