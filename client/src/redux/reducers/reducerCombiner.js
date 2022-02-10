@@ -1,4 +1,5 @@
 import { productDetailReducer } from "./product-detail.reducer";
+import { cartReducer } from "./cart.reducer";
 
 import { combineReducers } from "redux";
 
@@ -7,5 +8,6 @@ export const rootReducer = combineReducers({
      * cartReducer,
      * collectionsReducer
     **/
-    productDetailReducer: productDetailReducer
+    productDetailReducer: productDetailReducer,
+    cartReducer: cartReducer
 });
