@@ -28,7 +28,6 @@ function MoviesPage (props) {
                 <div className="content-container">
                     <ul className="item-list">
                         {data.getMovies.map(item => {
-                            console.log(item)
                             const { _id } = item;
                             return(
                             <li key={_id}>
