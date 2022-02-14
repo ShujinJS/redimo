@@ -23,7 +23,10 @@ $fast-transition: all 0.3s linear;
 #sideNavContainer{
     font-size: 16px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    transition: $fast-transition;
+    transition: $fast-transition;    
+    position: absolute;
+    z-index: 111111111111111111;
+
 
     @include flex-column-center;
 

@@ -8,13 +8,11 @@ import { MainContext } from "../../../../context/main-context/main.context";
 // Routing
 import { useNavigate } from "react-router-dom"
 // Apollo
-// import { useMutation, gql } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag"
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faEnvelope, faUser, faCamera } from  "@fortawesome/free-solid-svg-icons";
-import { auth, createUserProfileDocument } from "../../../../firebase/firebase.utils";
 
 
 const REGISTER_USER = gql`
