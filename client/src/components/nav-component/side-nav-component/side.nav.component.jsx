@@ -20,13 +20,16 @@ export default function SideNavComponent(props){
 
     let {currentUser, siteLogo} = props;
     let { loading, error, data } = useGetSiteLanguages();
-    console.log(data)
 
     const mainContext = useContext(MainContext);
     const darkMode = mainContext.state.darkMode;
     const siteLanguage = mainContext.state.siteLanguage;
     const sideNavToggled = mainContext.state.sideNavToggled;
+    const { user, logout } = useContext(MainContext);
  
+    const onLogout = () => {
+        logout();
+    }
 
     const toggleSideNav = () => {
         {!sideNavToggled? mainContext.dispatch({ type: "TOGGLE_SIDENAV_ON"}) : mainContext.dispatch({ type: "TOGGLE_SIDENAV_OFF"})}
@@ -45,7 +48,7 @@ export default function SideNavComponent(props){
         // })}
     }
 
-    if(loading) return "Loading...";
+    if(loading) return <></>;
     if(error) return `Bir hata meydana geldi: ${error}`;
     if(data) return (
         
@@ -66,10 +69,10 @@ export default function SideNavComponent(props){
                 </div>
 
                 {/* Searchbox: Arama kutusu */}
-                <div className={`search-box search-box-side ${darkMode ? "input-dark" : "input-light"}`}>
+                {/* <div className={`search-box search-box-side ${darkMode ? "input-dark" : "input-light"}`}>
                     <FontAwesomeIcon icon={faSearch}/>
                     <input className={`search-input ${darkMode ? "font-dark" : "font-light"}`} type="search" placeholder="Ne arıyorsunuz?"/>
-                </div>
+                </div> */}
 
                 {/* Linkler: Link listesi */}
                 <ul id="sideNavList">
@@ -125,7 +128,7 @@ export default function SideNavComponent(props){
                                 
                 </>
                 )
-                }) : "Loading"}
+                }) : ""}
                 </ul>
 
                 {/* User Panel: Giriş yap */}
@@ -137,13 +140,12 @@ export default function SideNavComponent(props){
                                     <>
                                     {siteLanguage == firstLvl.title ?
                                         firstLvl.content.map(secondLvl => {
-                                            console.log(secondLvl)
                                             return (
                                                 <>
                                                 {secondLvl.title == "userNav" ? 
                                                 
-                                                    currentUser ?
-                                                    <div onClick={() => auth.signOut()} className="authing">
+                                                    user ?
+                                                    <div onClick={onLogout} className={`auth-btn ${darkMode ? "font-dark" : "font-light"}`}>
                                                         {secondLvl.content[1].title}
                                                     </div> :
                                                     <Link to="login">

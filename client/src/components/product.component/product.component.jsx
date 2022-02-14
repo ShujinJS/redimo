@@ -28,7 +28,7 @@ function ProductComponent(props) {
     // Routing
     const navigate = useNavigate();
     const routeChange = ( _id ) => {
-        let path = `/productdetail/${_id}`;
+        let path = `/collections/${_id}`;
         navigate(path);
     }
 
@@ -60,7 +60,7 @@ function ProductComponent(props) {
 
     return (
         <div className={`product-card-container`}>
-            <div className={`product-card`}  onClick={() => getProductDetailClick(item)}>
+            <div className={`product-card ${darkMode ? "font-dark dark-bg" : ""}`}  onClick={() => getProductDetailClick(item)}>
                 <div className={`product-image`}
                 onMouseEnter={zoomInImage} onMouseLeave={zoomOutImage}
                 >
@@ -98,7 +98,7 @@ function ProductComponent(props) {
                     {discount ? 
                         <div>
                             <span className="discounted">{intDiscountedPrice} ₺</span>
-                            <span className="discounted percentage">▼ %15</span>
+                            <span className="discounted percentage">▼ {discount}%</span>
                         </div>
                     : ""}
                 </div>

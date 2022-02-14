@@ -16,7 +16,6 @@ function ProductDetailPage ( props ) {
   
   let { selectedProduct } = props;
   let { __typename, _id, topic, author, brand, title, price, director, year, duration, genre, color, pages, publisher, publishDate, imageUrl, shippingFee, discount } = selectedProduct;
-  console.log(selectedProduct)
 
   let colorImages;
   if(color) colorImages = color[0].images;
@@ -44,12 +43,6 @@ function ProductDetailPage ( props ) {
   let discountedPrice = Number(shopPrice - (shopPrice * (discount / 100))).toFixed(2);
   let intDiscountedPrice = new Intl.NumberFormat().format(discountedPrice);
 
-  console.log(shopPrice)
-  console.log(intPrice)
-  console.log(newPrice)
-  console.log(discountedPrice)
-  console.log(intDiscountedPrice)
-
   return (
     <div id="productDetailGroupContainer">
       <div id="productDetailGroupHolder">
@@ -57,7 +50,7 @@ function ProductDetailPage ( props ) {
         <div id="productDetailFirstHalf">
           <div id="productDetailImageHolder">
             <div id="productDetailImage">
-              {bigImage ? <img src={bigImage} className="product-detail-image"/> : "loading"}
+              {bigImage ? <img src={bigImage} className="product-detail-image"/> : ""}
             </div>
             <div id="productDetailImageGroup">
               <ul>
@@ -74,14 +67,14 @@ function ProductDetailPage ( props ) {
         </div>
 
         {/* Second Half */}
-        <div id="productDetailSecondHalf" >
+        <div id="productDetailSecondHalf" className={`${darkMode ? "font-dark footer-bg-dark" : ""}`}>
           <div id="productDetailDescriptionHolder">
             {/* Topic */}
             <div id="productDetailTopicGroup">
               {selectedProduct ? <>
                 <p className={`product-detail-topic`}>{author ? author : "" || brand ? brand : "" || topic ? topic : ""}</p>
                 <p className={`product-detail-title`}>{title}</p>
-              </> : "Loading..." }
+              </> : "" }
             </div>
             {/* Movie Details */}
             {director ? 
@@ -128,7 +121,6 @@ function ProductDetailPage ( props ) {
                 <ul>
                 {
                   color.map(color => {
-                  console.log(color)
                   return <li className={`product-detail-color ${color.title ?  "color-blue" : ""}`} onClick={()=> setSmallImages(color.images)}></li>
                   })
                 }
@@ -183,13 +175,13 @@ function ProductDetailPage ( props ) {
                     <span className='product-detail-price-label'>{siteLanguage == "TR" ? "Kargo Ücreti: " : "Shipping Fee: "}</span>
                     <span className='product-detail-price'>{shippingFee} ₺</span>
                   </div>
-                </> : "Loading..." }
+                </> : "" }
             </div>
 
           </div>
             {/* Cart Btn */}
             <div className={`product-detail-cartbtn`}>
-              {selectedProduct ? <AddToCartBtnComponent className=""/> : "Loading..."}
+              {selectedProduct ? <AddToCartBtnComponent className=""/> : ""}
             </div>
         </div>
       </div>

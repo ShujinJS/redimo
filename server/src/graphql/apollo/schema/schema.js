@@ -24,6 +24,7 @@ const typeDefs = gql`
         name: String!
         lastname: String!
         birthdate: String!
+        address: String!
         remember: RememberMe
         token: String
     }
@@ -35,12 +36,12 @@ const typeDefs = gql`
         name: String!
         lastname: String!
         birthdate: String
+        address: String!
     }
 
     input LoginInput {
         email: String
         password: String
-        remember: RememberMe
     }
 
 

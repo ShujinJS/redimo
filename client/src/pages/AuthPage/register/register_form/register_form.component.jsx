@@ -1,19 +1,16 @@
 import { useState, useEffect, useRef, useContext } from "react";
-
 // Styling
 import "./register_form.component.style.scss";
 import "../../../../components/theme/theme.component.style.scss";
 import "../../../../scss/authentication/authentication.common.style.scss";
-
 // ContextAPI
 import { MainContext } from "../../../../context/main-context/main.context";
-
 // Routing
 import { useNavigate } from "react-router-dom"
-
 // Apollo
-import { useMutation, gql } from "@apollo/client";
-
+// import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from "graphql-tag"
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faEnvelope, faUser, faCamera } from  "@fortawesome/free-solid-svg-icons";
@@ -29,6 +26,7 @@ const REGISTER_USER = gql`
             email
             password
             birthdate
+            token
         }
     }
 `
@@ -37,6 +35,7 @@ export default function FormGroupRegister(props){
 
     const mainContext = useContext(MainContext);
     const darkMode = mainContext.state.darkMode;
+    const siteLanguage = mainContext.state.siteLanguage;
 
     // Routing
     const navigate = useNavigate();
@@ -78,7 +77,8 @@ export default function FormGroupRegister(props){
         email: "",
         password: "",
         confirmedPassword: "",
-        birthdate: ""
+        birthdate: "",
+        address: ""
     });
 
     let {
@@ -88,10 +88,21 @@ export default function FormGroupRegister(props){
         email,
         password,
         confirmedPassword,
-        birthdate
+        birthdate,
+        address
     } = newUser;
 
+    const [errors, setErrors] = useState([])
+
     const [registerAUser, { loading, error, data }] = useMutation(REGISTER_USER, {
+        update(proxy, { data: { registerAUser: userData }}) {
+            mainContext.login(userData);
+            routeChange();
+        },
+        onError({ graphQLErrors }) {
+            setErrors(graphQLErrors);
+        },
+
         variables: {
             input: {
                 name: name,
@@ -99,7 +110,8 @@ export default function FormGroupRegister(props){
                 username: username,
                 email: email,
                 password: password,
-                birthdate: birthdate
+                birthdate: birthdate,
+                address: address
             }
         }
     })
@@ -132,8 +144,11 @@ export default function FormGroupRegister(props){
                 email: "",
                 password: "",
                 confirmedPassword: "",
-                birthdate: ""
-            })
+                birthdate: "",
+                address: ""
+            });
+            routeChange();
+
 
         } catch (err) {
             throw `${err.message} meydana geldi!`
@@ -141,7 +156,7 @@ export default function FormGroupRegister(props){
         }
     }
 
-    if(data) routeChange();
+    
 
 
 
@@ -151,8 +166,8 @@ export default function FormGroupRegister(props){
             <form onSubmit={handleSubmit} className={`auth-form ${darkMode ? "font-dark nav-bg-dark" : "font-light bg-light"}`}> 
 
                 <div className="form-header">
-                    <h2>Hoş Geldiniz</h2>
-                    <span>Hemen bir hesap açabilirsiniz</span>
+                    <h2>{siteLanguage == "TR" ? "Hoş Geldiniz" : "Welcome"}</h2>
+                    <span>{siteLanguage == "TR" ? "Hemen bir hesap açabilirsiniz!" : "You can create an account right away!"}</span>
                 </div>
 
                 <div className="form-input-group-holder">
@@ -163,24 +178,28 @@ export default function FormGroupRegister(props){
                             value={name} 
                             name="name"
                             className="input-style input-btn" 
-                            placeHolder={placeholderA}/>
+                            placeHolder={siteLanguage == "TR" ? "Ad" : "Name"}/>
                         </div>
                         <div className={`input-holder ${darkMode ? "form-input-dark" : "form-input-light"}`}>
-                            <input onChange={handleChange} name="lastname" 
+                            <input onChange={handleChange} 
+                            name="lastname" 
                             type={inputTypeB}
                             value={lastname}
-                            className="input-style input-btn" placeHolder={placeholderB}/>
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "Soyad" : "Lastname"}/>
                         </div>
                     </div>
 
                     <div className="input-group">
                         <div className={`input-holder ${darkMode ? "form-input-dark" : "form-input-light"}`}>
-                            <input onChange={handleChange} name="username" 
+                            <input onChange={handleChange} 
+                            name="username" 
                             type={inputTypeC} 
                             value={username}
-                            className="input-style input-btn" placeHolder={placeholderC}/>
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "Kullanıcı adı" : "Username"}/>
                         </div>
-                        <span className="notifier">{placeholderC} giriniz</span>
+                        <span className="notifier">{siteLanguage == "TR" ? "Kullanıcı adınızı giriniz" : "Enter your username"}</span>
                     </div>
 
                     <div className="input-group">
@@ -189,7 +208,8 @@ export default function FormGroupRegister(props){
                             name="email" 
                             type={inputTypeD} 
                             value={email}
-                            className="input-style input-btn" placeHolder={placeholderD}/>
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "E-posta" : "E-mail"}/>
                         </div>
                     </div>
 
@@ -199,19 +219,22 @@ export default function FormGroupRegister(props){
                             name="password" 
                             type={inputTypeE} 
                             value={password}
-                            className="input-style input-btn" placeHolder={placeholderE}/>
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "Parola" : "Password"}/>
                             </div>
-                        <span className="notifier">{placeholderE} giriniz</span>
+                        <span className="notifier">{siteLanguage == "TR" ? "Parolanızı giriniz" : "Enter your password"}</span>
                     </div>
 
                     <div className="input-group">
                         <div className={`input-holder ${darkMode ? "form-input-dark" : "form-input-light"}`}>
-                            <input onChange={handleChange} name="confirmedPassword" 
+                            <input onChange={handleChange} 
+                            name="confirmedPassword" 
                             type={inputTypeF} 
                             value={confirmedPassword}
-                            className="input-style input-btn" placeHolder={placeholderF}/>
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "Parola doğrula" : "Confirm password"}/>
                             </div>
-                        <span ref={alertRef}className="notifier">Parolanızı Doğrulayın</span>
+                        <span ref={alertRef}className="notifier">{siteLanguage == "TR" ? "Parolanızı doğrulayın" : "Confirm your password"}</span>
                     </div>
 
                     <div className="input-group">
@@ -220,20 +243,38 @@ export default function FormGroupRegister(props){
                             name="birthdate" 
                             type={inputTypeG} 
                             value={birthdate}
-                            className="input-style input-btn" placeHolder={placeholderG}/>
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "Doğum tarihi" : "Birth date"}/>
+                        </div>
+                    </div>
+
+                    <div className="input-group">
+                        <div className={`input-holder ${darkMode ? "form-input-dark" : "form-input-light"}`}>
+                            <input onChange={handleChange} 
+                            name="address" 
+                            type="text" 
+                            value={address}
+                            className="input-style input-btn" 
+                            placeHolder={siteLanguage == "TR" ? "Adres" : "Address"}/>
                         </div>
                     </div>
                 </div>
 
-                <input onClick={handleSubmit} name="birthDate" type="submit" value="KAYDOL" className={`input-style submit-btn ${darkMode ? "submit-btn-dark" : "submit-btn-light"}`}/>
+                <input onClick={handleSubmit} type="submit" value={siteLanguage == "TR" ? "KAYDOL" : "REGISTER"} className={`input-style submit-btn ${darkMode ? "submit-btn-dark" : "submit-btn-light"}`}/>
 
                 <div className="group-holder">
-                    <span>Hesabınız var mı?</span>
+                    <span>{siteLanguage == "TR" ? "Hesabınız var mı?" : "Do you have an account?"}</span>
                     <button onClick={routeChange} className={`auth-btn ${darkMode ? "logo-dark nav-bg-dark" : "logo-light bg-light"}`}>
-                        GİRİŞ YAP</button>
+                    {siteLanguage == "TR" ? "GİRİŞ YAP" : "LOGIN"}</button>
                 </div>
 
             </form>
+            <div>
+                {errors ? errors.map(function(error){
+                    <span>{error.message}</span>
+                }) : ""}
+            </div>
+
         </div>
 
     )

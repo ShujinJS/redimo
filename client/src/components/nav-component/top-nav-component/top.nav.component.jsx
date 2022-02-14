@@ -17,7 +17,7 @@ export default function TopNavComponent(){
 
     return (
         <>
-            <div id="topNavComponent">
+            <div id="topNavComponent" className={`${darkMode ? "footer-bg-dark" : "footer-bg-light"}`}>
                 <div className="top-main-container">
                     <LanguageButton/>      
                 </div>

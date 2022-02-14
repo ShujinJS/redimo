@@ -35,12 +35,7 @@
 
             &::placeholder{
                 opacity: 0.8;
-            }
-
-            &:focus{
-                padding: 8px;
-            }
-        
+            }        
         }
 
         .notifier{
@@ -71,6 +66,7 @@
     outline: none;
     border: none;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .submit-btn{

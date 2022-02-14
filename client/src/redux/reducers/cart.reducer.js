@@ -1,7 +1,8 @@
 import { cartConstants } from "../constants/cart.constants";
 
 let initState = {
-    cartItems: []
+    cartItems: [],
+    cartIndex: 0
 }
 
 export function cartReducer( state = initState, action ) {
@@ -12,6 +13,10 @@ export function cartReducer( state = initState, action ) {
         case cartConstants.ACTION_TYPE_REMOVE_FROM_CART:
             let _id = action.payload._id;
             return { ...state, cartItems: state.cartItems.filter((cart) => cart._id !== _id) };
+        case cartConstants.ACTION_TYPE_INCREASE_CART_INDEX:
+            return { ...state, cartIndex: state.cartItems.length };
+        case cartConstants.ACTION_TYPE_DECREASE_CART_INDEX:
+            return { ...state, cartIndex: state.cartItems.length };
         default:
             return state;
     }

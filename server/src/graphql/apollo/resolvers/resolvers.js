@@ -15,7 +15,16 @@ module.exports = {
     Query: {
 
         message: (_, {_id}) => Message.findById(_id),
-        findUser: (_, {_id}) => User.findById(_id),
+
+        // Find User 
+        findUser: (root, {_id}) => {
+            return new Promise((resolve, reject) => {
+                User.findById({_id: _id},(err, users) => {
+                    if(err) reject(err);
+                    else resolve(users);
+                })
+            })
+        },
 
         // Get Site Languages 
         getSiteLanguages: (root) => {
@@ -101,7 +110,7 @@ module.exports = {
     Mutation: {
 
         // Register User
-        async registerUser(_, { input: {username, email, password, name, lastname, birthdate} }) {
+        async registerUser(_, { input: {username, email, password, name, lastname, birthdate, address } }) {
             // See if an old user exist with email attempting to register
             const oldUser = await User.findOne({ email });
 
@@ -119,7 +128,8 @@ module.exports = {
                 password: encryptedPassword,
                 name: name,
                 lastname: lastname,
-                birthdate: birthdate
+                birthdate: birthdate,
+                address: address
             })
             // Create our JWT (attach to our User model)
             const token = jwt.sign(

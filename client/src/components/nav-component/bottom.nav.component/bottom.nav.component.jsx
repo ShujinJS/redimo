@@ -6,8 +6,6 @@ import "../../theme/theme.component.style.scss";
 import {Link} from "react-router-dom";
 // Apollo Custom Hooks
 import useGetSiteLanguages from "../../../Apollo/hooks/Languages/useGetSiteLanguages";
-// Firebase
-import { auth } from '../../../firebase/firebase.utils';
 //Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from  "@fortawesome/free-solid-svg-icons";
@@ -19,17 +17,21 @@ import ThemeButtonComponent from "../../theme-button/theme.button.component";
 import { MainContext } from "../../../context/main-context/main.context";
 
 function BottomNavComponent(props) {
-
-    let {currentUser, siteLogo} = props;
+    let { siteLogo } = props;
     let { loading, error, data } = useGetSiteLanguages();
-
-
 
     // ContextAPI
     const mainContext = useContext(MainContext);
     const darkMode = mainContext.state.darkMode;
     const siteLanguage = mainContext.state.siteLanguage;
     const sideNavToggled = mainContext.state.sideNavToggled;
+    const { user, logout } = useContext(MainContext);
+    console.log(user)
+
+
+    const onLogout = () => {
+        logout();
+    }
 
     
     const toggleSideNav = () => {
@@ -37,7 +39,7 @@ function BottomNavComponent(props) {
 
     }
 
-    if(loading) return "Loading...";
+    if(loading) return <></>;
     if(error) return `Bir hata meydana geldi: ${error}`;
     if(data) return (
 
@@ -89,13 +91,13 @@ function BottomNavComponent(props) {
                                     
                                     </>
                                     )
-                                }) : "Loading"}
+                                }) : ""}
 
                             </ul>
-                            <div className={`search-box search-box-bottom-nav ${darkMode ? "input-dark" : "input-light"}`}>
+                            {/* <div className={`search-box search-box-bottom-nav ${darkMode ? "input-dark" : "input-light"}`}>
                                 <FontAwesomeIcon icon={faSearch}/>
                                 <input className={`search-input ${darkMode ? "font-dark" : "font-light"}`} type="search" placeHolder="..."/>
-                            </div>
+                            </div> */}
                             <ThemeButtonComponent/>
 
                         </div>
@@ -114,13 +116,12 @@ function BottomNavComponent(props) {
                                     <>
                                     {siteLanguage == firstLvl.title ?
                                         firstLvl.content.map(secondLvl => {
-                                            console.log(secondLvl)
                                             return (
                                                 <>
                                                 {secondLvl.title == "userNav" ? 
                                                 
-                                                    currentUser ?
-                                                    <div onClick={() => auth.signOut()} className="authing">
+                                                    user ?
+                                                    <div onClick={onLogout} className={`auth-btn ${darkMode ? "font-dark" : "font-light"}`}>
                                                         {secondLvl.content[1].title}
                                                     </div> :
                                                     <Link to="login">

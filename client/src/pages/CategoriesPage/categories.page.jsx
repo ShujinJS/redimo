@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 // Styling
 import "./categories.page.style.scss";
 // Routing
@@ -7,9 +7,17 @@ import { useNavigate } from "react-router-dom"
 import { MainContext } from "../../context/main-context/main.context";
 // Apollo Custom Hooks
 import useGetSiteLanguages from "../../Apollo/hooks/Languages/useGetSiteLanguages";
+// Redux
+import { connect } from "react-redux";
+import * as actions from "../../redux/_actions/actions";
 
-function CategoriesPage() {
+function CategoriesPage( props ) {
   let { loading, error, data } = useGetSiteLanguages();
+  let { startSpinnerAction, endSpinnerAction } = props;    
+
+  useEffect(() => {
+        
+  }, [data]);  
 
     const mainContext = useContext(MainContext);
     const darkMode = mainContext.state.darkMode;
@@ -28,9 +36,9 @@ function CategoriesPage() {
       currentImage.style.width = "100%";
     }
 
-    if(loading) return "Loading...";
+    if(loading) { startSpinnerAction(); return <></>};
     if(error) return `Bir hata meydana geldi: ${error}`;
-    if(data) return (
+    if(data) { endSpinnerAction(); return (
       
       <div id="categoriesContainer">
         <div id="categoriesGroupHolder">
@@ -44,7 +52,6 @@ function CategoriesPage() {
                       return (
                         <>
                           {secondLvl.title == "middleNav" ? secondLvl.content.map(thirdLvl => {
-                            console.log(thirdLvl)
                             return (
                               
                               <>
@@ -65,7 +72,7 @@ function CategoriesPage() {
                                       <img src={categories.bgImageUrl}/>
                                     </div>
                                   </div>
-                                  <div id="bottomTicket" className={`${darkMode ? "font-dark nav-bg-dark" : "font-light bg-light"}`}>
+                                  <div id="bottomTicket" className={`${darkMode ? "font-dark nav-bg-dark" : "font-light footer-bg-light"}`}>
 
                                   </div>
 
@@ -89,7 +96,17 @@ function CategoriesPage() {
           </div>
         </div>
       </div>
-  );
+    )};
 };
 
-export default CategoriesPage;
+function mapStateToProps ( state ) {
+
+}
+
+const mapDispatchToProps = {
+  startSpinnerAction: actions.spinnerActions.startSpinnerAction,
+  endSpinnerAction: actions.spinnerActions.endSpinnerAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage);
+

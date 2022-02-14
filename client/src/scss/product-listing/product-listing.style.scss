@@ -21,18 +21,19 @@ $fast-transition: all 0.3s linear;
 }
 
 .productsPageContainer{
-    width: 80%;
+    width: 100%;
+    // width: 80%;
     margin: 40px auto;
     display: flex;
     justify-content: space-between;
 
     .productsCollectionContainer{
-        width: 85%;
+        width: 100%;
+        // width: 85%;
         padding: 15px;
         margin: 0 auto;
         display: inherit;
         justify-content: center;
-        align-items: center;
         border: 1px solid none;
         border-radius: 10px;
         overflow: hidden;

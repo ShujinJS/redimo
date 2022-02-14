@@ -12,6 +12,8 @@ const PORT = 4000;
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@redimodb.67se9.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
+
+
 // creating a server
 const server = new ApolloServer({ typeDefs, resolvers });
 

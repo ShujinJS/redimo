@@ -14,41 +14,38 @@ import * as actions from "../../redux/_actions/actions";
 function CollectionsPage (props) {
 
     const { loading, error, data } = useGetCollections();
-    console.log(data)
+    let { startSpinnerAction, endSpinnerAction } = props;    
 
     // Merging a new collections array with each object contains arrays
     var collectionsData = [];
     var collections = [];
     if(data) collectionsData = Object.values(data);
-    console.log(collectionsData);
     if(data) collections = [].concat.apply([], collectionsData)
-    console.log(collections);
 
     useEffect(() => {
 
     }, [data]);  
 
-    if(loading) return "Loading...";
+    if(loading) { startSpinnerAction(); return <></> }
     if(error) return `Bir hata meydana geldi: ${error}`;
-    if(data) return (
+    if(data) { endSpinnerAction(); return (
         <div className="productsPageContainer">
             <div className="productsCollectionContainer">
                 <div className="content-container">
                     <ul className="item-list">
                         {collections.map(item => {
-                            console.log(item)
                             const { _id } = item;
                             return(
-                            <li key={_id}>
-                                <ProductComponent item={item}/>
-                            </li>
+                                <li key={_id}>
+                                    <ProductComponent item={item}/>
+                                </li>
                             )
                         })}
                     </ul>
                 </div>
             </div>
-        </div>
-    )
+        </div>            
+    )}
 }
 
 function mapStateToProps ( state ) {
@@ -58,7 +55,9 @@ function mapStateToProps ( state ) {
 
 const mapDispatchToProps = {
     getProductDetailAction: actions.productDetailActions.getProductDetailAction,
-    clearProductDetailAction: actions.productDetailActions.clearProductDetailAction
+    clearProductDetailAction: actions.productDetailActions.clearProductDetailAction,
+    startSpinnerAction: actions.spinnerActions.startSpinnerAction,
+    endSpinnerAction: actions.spinnerActions.endSpinnerAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionsPage);

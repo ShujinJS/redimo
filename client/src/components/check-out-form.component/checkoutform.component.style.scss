@@ -1,0 +1,15 @@
+.pay-btn{
+    width: 100%;
+    margin-top: 20px;
+    padding: 8px;
+    color: white;
+    background-color: rgb(19, 67, 145);
+    border: 1px solid rgb(19, 67, 145);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition: all 0.3s linear;
+
+    :hover{
+        background-color: rgb(57, 113, 202);
+    }
+}

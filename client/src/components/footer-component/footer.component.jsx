@@ -27,12 +27,24 @@ export default function FooterComponent(){
             url: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2147555239/settings_images/dW5iJNvT8SMYsXR6gmtg_BzWWXgLMTeyaPZSxpHAL_Redux_for_dummies.png"
         },
         {
-            title: "Scss",
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/1280px-Sass_Logo_Color.svg.png"
+            title: "Apollo",
+            url: "https://aws1.discourse-cdn.com/business5/uploads/apollographql/original/1X/25bd5104d61020fe4dc0777a5919cd009bca633e.png"
         },
         {
-            title: "Firebase",
-            url: "https://4.bp.blogspot.com/-rtNRVM3aIvI/XJX_U07Z-II/AAAAAAAAJXY/YpdOo490FTgdKOxM4qDG-2-EzcNFAWkKACK4BGAYYCw/s640/logo%2Bfirebase%2Bicon.png"
+            title: "GraphQL",
+            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/2048px-GraphQL_Logo.svg.png"
+        },
+        {
+            title: "MongoDB",
+            url: "https://d33wubrfki0l68.cloudfront.net/4b27b5bdd5af913e7b5ccc0139cad7fce72ee93b/ab559/img/integrations/mongodb.png"
+        },
+        {
+            title: "Stripe",
+            url: "https://seeklogo.com/images/S/stripe-logo-C409DC9652-seeklogo.com.png"
+        },
+        {
+            title: "Scss",
+            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/1280px-Sass_Logo_Color.svg.png"
         },
         {
             title: "GitHub",

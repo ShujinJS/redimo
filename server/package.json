@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "backend for redimo-app",
-  "main": "apollo.server.js",
+  "main": "express.apollo.server.js",
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
     "@graphql-toolkit/schema-merging": "^0.10.7",
@@ -23,11 +23,12 @@
     "mongoose": "^6.1.5",
     "nodemon": "^2.0.15",
     "redux": "^4.1.2",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "stripe": "^8.202.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/apollo.server"
+    "start": "nodemon src/express.apollo.server"
   },
   "author": "",
   "license": "MIT",

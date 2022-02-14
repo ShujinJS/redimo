@@ -14,15 +14,15 @@ import * as actions from "../../redux/_actions/actions";
 
 function MoviesPage (props) {
     const { loading, error, data } = useGetMovies();
-    console.log(data)
+    let { startSpinnerAction, endSpinnerAction } = props;    
 
     useEffect(() => {
         
     }, [data]);  
 
-    if(loading) return "Loading...";
+    if(loading) { startSpinnerAction(); return <></> };
     if(error) return `Bir hata meydana geldi: ${error}`;
-    if(data) return (
+    if(data) { endSpinnerAction(); return (
         <div className="productsPageContainer">
             <div className="productsCollectionContainer">
                 <div className="content-container">
@@ -40,7 +40,7 @@ function MoviesPage (props) {
                 </div>
             </div>
         </div>
-    )
+    )}
 }
 
 function mapStateToProps ( state ) {
@@ -50,7 +50,9 @@ function mapStateToProps ( state ) {
 
 const mapDispatchToProps = {
     getProductDetailAction: actions.productDetailActions.getProductDetailAction,
-    clearProductDetailAction: actions.productDetailActions.clearProductDetailAction
+    clearProductDetailAction: actions.productDetailActions.clearProductDetailAction,
+    startSpinnerAction: actions.spinnerActions.startSpinnerAction,
+    endSpinnerAction: actions.spinnerActions.endSpinnerAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);
