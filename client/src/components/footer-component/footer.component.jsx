@@ -31,6 +31,14 @@ export default function FooterComponent(){
             url: "https://aws1.discourse-cdn.com/business5/uploads/apollographql/original/1X/25bd5104d61020fe4dc0777a5919cd009bca633e.png"
         },
         {
+            title: "Nodejs",
+            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png"
+        },
+        {
+            title: "Expressjs",
+            url: "https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png"
+        },
+        {
             title: "GraphQL",
             url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/2048px-GraphQL_Logo.svg.png"
         },
